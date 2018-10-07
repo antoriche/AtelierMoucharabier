@@ -1,0 +1,1 @@
+<div class="ModelsForm" form='<?php echo json_encode($this->form) ?>'></div>

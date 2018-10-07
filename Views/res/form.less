@@ -1,0 +1,47 @@
+.placeholder(@rules){
+    &::-webkit-input-placeholder{
+       @rules();
+    }
+ 
+    &:-moz-placeholder{
+       @rules();
+    }
+ 
+    &::-moz-placeholder{
+       @rules();
+    }
+ 
+    &:-ms-input-placeholder{
+       @rules();
+    }
+}
+
+form{
+    max-width: 400px;
+    width: 100%;
+}
+
+input[type=text]{
+    padding: 6px 10px;
+    margin: 4px 0;
+    box-sizing: border-box;
+    width: 100%;
+    &[bold]{
+        font-weight:bold;
+        // .placeholder({font-weight:initial});
+    }
+}
+
+textarea{
+    width: 100%;
+    resize: vertical;
+    margin-bottom: 10px;
+}
+
+input[type=file]{
+    display: block;
+    margin: 10px;
+}
+input[type=submit]{
+    float: right;
+}
