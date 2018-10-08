@@ -5,9 +5,9 @@
         }
         public function run(){
             $this->elements = [
-                $this->link("Accueil","Home"),
-                $this->link("Modèles","Models"),
-                $this->link("Gallerie","Gallery"),
+                $this->link("Présentation","home"),
+                $this->link("Modèles","models"),
+                $this->link("Gallerie","gallery"),
                 $this->link("Contact","contact")
             ];
         }

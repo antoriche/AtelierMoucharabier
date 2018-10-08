@@ -10,12 +10,12 @@
         ?>
         </tr>
     </table>
-    <div id="fullScreen" onClick="fullScreen()">
-        <div style="display: table-cell; vertical-align: middle;">
-            <img/>
-        </div>
-    </div>
 </div>
+<span id="fullScreen" onClick="fullScreen()">
+    <div style="display: table-cell; vertical-align: middle;">
+        <img/>
+    </div>
+</span>
 <script>
     function fullScreen(file){
         const element = document.getElementById("fullScreen");

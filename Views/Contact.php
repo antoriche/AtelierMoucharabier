@@ -14,7 +14,7 @@
         <textarea name="message" rows="10"></textarea>
         <div>
             Pièces jointes :
-            <input name="attachment" type="file" multiple="multiple"/>
+            <input name="attachments[]" type="file" multiple="multiple"/>
         </div>
         <input type="submit" value="Envoyer"/>
     </form>
