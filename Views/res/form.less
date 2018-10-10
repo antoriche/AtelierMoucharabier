@@ -16,7 +16,7 @@
     }
 }
 
-form{
+#contact-form{
     max-width: 400px;
     width: 100%;
 }
@@ -45,4 +45,45 @@ input[type=file]{
 }
 input[type=submit]{
     float: right;
+}
+
+.imageSelector{
+    height: 110px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    // border: solid 1px black;
+
+    img{
+        height: calc( 100% - 10px );
+        display: inline-block;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+    .active{
+        border : 2px solid darkorange;
+        border-radius: 5px;
+    }
+}
+
+ /* width */
+ ::-webkit-scrollbar {
+    height: 7px;
+    width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    opacity: 0.1px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
 }

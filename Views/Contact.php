@@ -1,6 +1,6 @@
 <div>
     <h2>Contact</h2>
-    <form method="post" enctype="multipart/form-data" >
+    <form id="#contact-form" method="post" enctype="multipart/form-data" >
         <table style="width: 100%;">
             <tr>
                 <td>Votre email : </td>

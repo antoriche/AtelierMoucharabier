@@ -15,10 +15,19 @@
         }
 
         private function uploadFiles(){
-            $target_dir = "Attachments/";
-            $timestamp = time();
+            if(count($_FILES["attachments"]["name"]) <= 0)return null;
+            $target_dir = "Attachments/".time().'/';
             if(!is_dir($target_dir))mkdir($target_dir);
-            $target_file = $target_dir . basename($_FILES["attachments"]["name"][0]);
+            $ret = array();
+            foreach( $_FILES["attachments"]["name"] as $i => $name ){
+                $target_file = $target_dir . basename($name);
+                if (!move_uploaded_file($_FILES["attachments"]["tmp_name"][$i], $target_file)) {
+                    rmdir($target_dir);
+                    throw "Erreur lors de l'importation des fichiers";
+                }
+                $ret[$name]='http://'. $_SERVER ['HTTP_HOST']. '/' .$target_file;
+            }
+            return $ret;
         }
 
         private function sendMail(){
@@ -46,20 +55,29 @@
                 //Attachments
                 //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
                 //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+                $files = $this->uploadFiles();
 
                 //Content
                 $mail->isHTML(true);                                  // Set email format to HTML
                 $mail->Subject = $_POST["subject"];
-                $mail->Body =   "<div>".str_replace("\r","<br>",$_POST["message"]) . "</div><br>\r\n\r\n".
-                                "<div><b>Pièces jointes : </b><ul></ul></div>";
+                $mail->Body =   "<div>".str_replace("\r","<br>",$_POST["message"]) . "</div><br>\r\n\r\n";
+                                
                 $mail->AltBody= $_POST["message"] ."\r\n\r\n".
-                                "Pièces jointes : ";
+                               "Pièces jointes : \r\n";
+                if($files){
+                    $mail->Body .="<div><b>Pièces jointes : </b><ul>";
+                    foreach($files as $name => $link){
+                        $mail->Body .= "<li><a href='$link'>$name</a></li>";
+                        $mail->AltBody .= "\t$link\r\n";
+                    }
+                    $mail->Body .= "</ul></div>";
+                }
+                
 
-                $this->uploadFiles();
 
                 $mail->send();
             } catch (Exception $e) {
-                echo 'Désolé, Une erreur s\'est produite lors de l\'envoi du message.';
+                echo 'Désolé, Une erreur s\'est produite lors de l\'envoi du message : '.$e;
             }
         }
         

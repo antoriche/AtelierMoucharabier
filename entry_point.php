@@ -6,7 +6,7 @@ define ( 'MODELS', 'Models/' );
 define ( 'CONTROLLERS', 'Controllers/' );
 
 
-$url = 'http://' . $_SERVER ['HTTP_HOST'] . $_SERVER ['REQUEST_URI'];
+define( 'URL', 'http://' . $_SERVER ['HTTP_HOST'] . $_SERVER ['REQUEST_URI']);
 
 function autoloader($class) {
 	include MODELS . $class . '.class.php';
@@ -16,7 +16,7 @@ spl_autoload_register ( 'autoloader' );
 
 $db = Db::getInstance ();
 if (isset ( $_GET ["page"] )) {
-	$page = htmlentities ( $_GET ["page"] );
+	$page = preg_replace("/[^a-zA-Z0-9]+/", "", htmlentities ( $_GET ["page"] ) );
 } else {
 	$page = "Home";
 }
